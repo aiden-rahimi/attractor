@@ -1,11 +1,13 @@
-// The landing gallery: editorial, minimal, warm. Live (statically rendered)
-// thumbnails sit framed like artworks; pixel-art accents add personality.
+// The atlas index: a dark field of charted plates. Each visualization is a
+// celestial body with a plate numeral, a dotted taxonomy name, a live canvas
+// chart in a hairline frame, and the curator's one-line note.
 
 import { VISUALIZATIONS } from './viz/registry';
+import { PLATES } from './shared/atlas';
 import { makeGradientCss } from './shared/palettes';
-import { SPARKLE, mascotSvg, rainSparkles } from './shared/pixel';
+import { colophonSvg, rainSparkles } from './shared/pixel';
 
-const REPO = 'https://github.com/NikitaSergeev07/MathVisualize';
+const REPO = 'https://github.com/aiden-rahimi/MathVisualize';
 const FALLBACK_PALETTES = ['inferno', 'aurora', 'turbo', 'sunset', 'ice'];
 
 export function renderGallery(container: HTMLElement): void {
@@ -14,11 +16,13 @@ export function renderGallery(container: HTMLElement): void {
   const header = document.createElement('header');
   header.className = 'site-header';
   header.innerHTML = `
-    <a class="wordmark" href="#/">${SPARKLE('#d97f57', 3)}MathVisualize</a>
+    <a class="wordmark" href="#/" aria-label="attractor — home">
+      <img src="./logo-hero.svg" alt="" width="30" height="30" />
+      <span>attractor</span>
+    </a>
     <nav class="site-nav">
-      <a href="#" class="surprise" data-surprise>Surprise me</a>
-      <a href="${REPO}" target="_blank" rel="noopener">GitHub</a>
-      <a href="${REPO}/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a>
+      <a href="#" data-surprise>surprise me</a>
+      <a href="${REPO}" target="_blank" rel="noopener">source</a>
     </nav>`;
   header.querySelector('[data-surprise]')?.addEventListener('click', (e) => {
     e.preventDefault();
@@ -27,59 +31,71 @@ export function renderGallery(container: HTMLElement): void {
   });
   container.append(header);
 
-  const page = document.createElement('div');
-  page.className = 'gallery';
+  const field = document.createElement('main');
+  field.className = 'atlas-field';
 
-  const hero = document.createElement('section');
-  hero.className = 'hero fade-up';
-  hero.innerHTML = `
-    <span class="eyebrow">${SPARKLE('#d97f57', 2)} Open-source gallery</span>
-    <h1 class="hero-title">Mathematics you can <em>play</em> with.</h1>
-    <p class="hero-sub">A small collection of interactive visualizations. Move a slider,
-    roll the dice, and share a link to the exact picture you find.</p>`;
-  page.append(hero);
+  const intro = document.createElement('p');
+  intro.className = 'atlas-intro';
+  intro.innerHTML =
+    'five bodies, charted. <em>each one rewards a wandering hand.</em>';
+  field.append(intro);
 
-  const grid = document.createElement('div');
-  grid.className = 'grid';
-  page.append(grid);
+  const spread = document.createElement('div');
+  spread.className = 'spread';
+  field.append(spread);
 
   // Render thumbnails one per frame instead of all at once — no load-time jank.
   const thumbJobs: Array<() => void> = [];
 
   VISUALIZATIONS.forEach((viz, i) => {
-    const card = document.createElement('a');
-    card.className = 'card fade-up';
-    card.style.animationDelay = `${0.06 * (i + 1)}s`;
-    card.href = `#/v/${viz.id}`;
+    const meta = PLATES[viz.id] ?? {
+      numeral: String(i + 1),
+      taxonomy: viz.id,
+      note: viz.tagline,
+    };
 
-    const thumb = document.createElement('div');
-    thumb.className = 'card-thumb';
+    const plate = document.createElement('a');
+    plate.className = `plate plate-${i + 1} rise`;
+    plate.style.animationDelay = `${0.07 * (i + 1)}s`;
+    plate.href = `#/v/${viz.id}`;
+
+    const head = document.createElement('div');
+    head.className = 'plate-head';
+    head.innerHTML = `
+      <span class="plate-numeral">${meta.numeral}</span>
+      <span class="plate-taxonomy">${meta.taxonomy}</span>`;
+
+    const frame = document.createElement('div');
+    frame.className = 'plate-frame';
     const canvas = document.createElement('canvas');
     canvas.width = 480;
     canvas.height = 320;
-    thumb.append(canvas);
+    frame.append(canvas);
 
     thumbJobs.push(() => {
       if (viz.thumbnail) {
         try {
           viz.thumbnail(canvas, 1234 + i);
         } catch {
-          thumb.style.background = makeGradientCss(FALLBACK_PALETTES[i % FALLBACK_PALETTES.length], '135deg');
+          frame.style.background = makeGradientCss(
+            FALLBACK_PALETTES[i % FALLBACK_PALETTES.length],
+            '135deg',
+          );
         }
       } else {
-        thumb.style.background = makeGradientCss(FALLBACK_PALETTES[i % FALLBACK_PALETTES.length], '135deg');
+        frame.style.background = makeGradientCss(
+          FALLBACK_PALETTES[i % FALLBACK_PALETTES.length],
+          '135deg',
+        );
       }
     });
 
-    const meta = document.createElement('div');
-    meta.className = 'card-meta';
-    meta.innerHTML = `
-      <span class="card-index">${String(i + 1).padStart(2, '0')}</span>
-      <h2>${viz.title}</h2>
-      <p>${viz.tagline}</p>`;
+    const cap = document.createElement('div');
+    cap.className = 'plate-cap';
+    cap.innerHTML = `<h2>${viz.title}</h2><p>${meta.note}</p>`;
 
-    card.append(thumb, meta);
-    grid.append(card);
+    plate.append(head, frame, cap);
+    spread.append(plate);
   });
 
   let job = 0;
@@ -90,39 +106,41 @@ export function renderGallery(container: HTMLElement): void {
   };
   requestAnimationFrame(runNext);
 
+  container.append(field);
+
   const footer = document.createElement('footer');
-  footer.className = 'gallery-footer';
+  footer.className = 'atlas-footer';
 
   const left = document.createElement('div');
   left.className = 'footer-left';
-  const mascot = document.createElement('button');
-  mascot.className = 'mascot';
-  mascot.type = 'button';
-  mascot.title = 'hello';
-  mascot.setAttribute('aria-label', 'mascot');
-  mascot.innerHTML = mascotSvg(4);
+  const mark = document.createElement('button');
+  mark.className = 'colophon';
+  mark.type = 'button';
+  mark.title = 'hello';
+  mark.setAttribute('aria-label', 'colophon mark');
+  mark.innerHTML = colophonSvg(40);
   let pats = 0;
-  mascot.addEventListener('click', () => {
-    mascot.classList.remove('hop');
-    void mascot.offsetWidth; // restart animation
-    mascot.classList.add('hop');
+  mark.addEventListener('click', () => {
+    mark.classList.remove('hop');
+    void mark.offsetWidth; // restart animation
+    mark.classList.add('hop');
     if (++pats >= 5) {
       pats = 0;
       rainSparkles();
     }
   });
   const made = document.createElement('span');
-  made.textContent = 'Made for the love of math.';
-  left.append(mascot, made);
+  made.className = 'footer-made';
+  made.textContent = 'made for the love of math.';
+  left.append(mark, made);
 
-  const links = document.createElement('div');
-  links.className = 'footer-links';
-  links.innerHTML = `
-    <a href="${REPO}" target="_blank" rel="noopener">Source</a>
-    <a href="${REPO}/blob/main/LICENSE" target="_blank" rel="noopener">MIT licensed</a>`;
+  const right = document.createElement('div');
+  right.className = 'footer-right';
+  right.innerHTML = `
+    <span class="logo-credit">logo by r&uuml;ya</span>
+    <a href="${REPO}" target="_blank" rel="noopener">source</a>
+    <a href="${REPO}/blob/main/LICENSE" target="_blank" rel="noopener">mit</a>`;
 
-  footer.append(left, links);
-  page.append(footer);
-
-  container.append(page);
+  footer.append(left, right);
+  container.append(footer);
 }

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">2 · Two foci + trail</title>
+  <desc id="desc">Two diagonal dots inside an original unequal looping trail, inspired by Lorenz lobe centers. Transparent background; exact color #8B5CF6.</desc>
+  <path d="M 128.000 130.000 C 88.000 78.000 24.000 98.000 34.000 155.000 C 43.000 210.000 100.000 209.000 128.000 130.000 C 149.000 79.000 192.000 62.000 209.000 95.000 C 232.000 138.000 156.000 166.000 128.000 130.000 Z" fill="none" stroke="#8B5CF6" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="78.000" cy="152.000" r="6.500" fill="#8B5CF6"/>
+  <circle cx="176.000" cy="111.000" r="6.500" fill="#8B5CF6"/>
+</svg>

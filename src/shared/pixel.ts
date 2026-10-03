@@ -1,76 +1,53 @@
-// Tiny 8-bit pixel-art helpers. Used sparingly: button icons, the favicon and a
-// clickable mascot easter egg. The rest of the site stays minimal — these are
-// the playful accents.
+// Small inline SVG helpers for the atlas: hairline line-icons for buttons,
+// the two-foci colophon mark (the easter egg), and a violet sparkle rain.
+// Everything is drawn in strokes — no pixel art lives here anymore.
 
-type ColorMap = Record<string, string>;
-
-/** Turn a grid of characters into a crisp-edged inline SVG string. */
-export function pixelArt(rows: string[], map: ColorMap, px = 2): string {
-  const w = Math.max(...rows.map((r) => r.length));
-  const h = rows.length;
-  let rects = '';
-  for (let y = 0; y < h; y++) {
-    for (let x = 0; x < rows[y].length; x++) {
-      const fill = map[rows[y][x]];
-      if (!fill) continue;
-      rects += `<rect x="${x * px}" y="${y * px}" width="${px}" height="${px}" fill="${fill}"/>`;
-    }
-  }
-  return `<svg width="${w * px}" height="${h * px}" viewBox="0 0 ${w * px} ${h * px}" fill="none" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" class="px">${rects}</svg>`;
+/** A 24×24 line icon drawn in currentColor. */
+function lineIcon(paths: string): string {
+  return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
 }
 
-const cur: ColorMap = { '#': 'currentColor' };
-
-// --- button / inline icons (inherit text color) ---
-export const ICON_RANDOM = pixelArt(
-  ['.......', '.#...#.', '.......', '...#...', '.......', '.#...#.', '.......'],
-  cur,
-);
-export const ICON_PNG = pixelArt(
-  ['#######', '#.....#', '#.#...#', '#.....#', '#..#..#', '#.#.#.#', '#######'],
-  cur,
-);
-export const ICON_SHARE = pixelArt(
-  ['....###', '.....##', '....#.#', '#####.#', '#...#..', '#...#..', '#####..'],
-  cur,
-);
-export const ICON_REC = pixelArt(
-  ['.###.', '#####', '#####', '#####', '.###.'],
-  { '#': '#cc4033' },
+/** Shuffle / randomize. */
+export const ICON_RANDOM = lineIcon(
+  '<path d="M3 7h4l10 10h4"/><path d="M3 17h4l3-3"/><path d="M14 10l3-3h4"/><path d="M18 4v3h-3"/><path d="M18 20v-3h-3"/>',
 );
 
-// clay diamond "sparkle" used as an editorial bullet / favicon
-export const SPARKLE = (color = '#c15f3c', px = 3) =>
-  pixelArt(['..#..', '.###.', '#####', '.###.', '..#..'], { '#': color }, px);
+/** Share: three nodes joined. */
+export const ICON_SHARE = lineIcon(
+  '<circle cx="6" cy="12" r="2.4"/><circle cx="17" cy="5.5" r="2.4"/><circle cx="17" cy="18.5" r="2.4"/><path d="M8.2 10.8l6.6-4M8.2 13.2l6.6 4"/>',
+);
 
-// --- the mascot: an original pixel cat (the easter egg) ---
-const MASCOT_ROWS = [
-  '..c......c..',
-  '..cc....cc..',
-  '..cccccccc..',
-  '.cccccccccc.',
-  '.cwkcccckwc.',
-  '.cccccccccc.',
-  '.ccccwwcccc.',
-  '.cccccccccc.',
-  '..cccccccc..',
-  '..cc.cc.cc..',
-];
-const MASCOT_MAP: ColorMap = { c: '#c15f3c', w: '#f3efe6', k: '#2a2722' };
+/** Export PNG: arrow down into a tray. */
+export const ICON_PNG = lineIcon(
+  '<path d="M12 4v10"/><path d="M8 10.5l4 4 4-4"/><path d="M5 19h14"/>',
+);
 
-export function mascotSvg(px = 4): string {
-  return pixelArt(MASCOT_ROWS, MASCOT_MAP, px);
+/** Record: a filled dot. */
+export const ICON_REC =
+  '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.5" fill="#d0543f"/></svg>';
+
+/** The two-foci colophon mark, inline (Rüya's logo, violet). */
+export function colophonSvg(size = 44): string {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 256 256" fill="none" aria-hidden="true">
+    <path d="M 128.000 130.000 C 88.000 78.000 24.000 98.000 34.000 155.000 C 43.000 210.000 100.000 209.000 128.000 130.000 C 149.000 79.000 192.000 62.000 209.000 95.000 C 232.000 138.000 156.000 166.000 128.000 130.000 Z" stroke="#8B5CF6" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="78" cy="152" r="13" fill="#8B5CF6"/>
+    <circle cx="176" cy="111" r="13" fill="#8B5CF6"/>
+  </svg>`;
 }
 
-/** Easter egg: rain a handful of pixel diamonds down the screen, then clean up. */
+/** A small four-pointed star, violet, for the sparkle rain. */
+export const star = (color: string, size: number): string =>
+  `<svg width="${size}" height="${size}" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="${color}"/></svg>`;
+
+/** Easter egg: rain a handful of violet stars down the screen, then clean up. */
 export function rainSparkles(count = 28): void {
-  const colors = ['#c15f3c', '#4a6fa5', '#d9a441', '#7a9b6e'];
+  const colors = ['#8b5cf6', '#a78bfa', '#6d28d9', '#c4b5fd'];
   const layer = document.createElement('div');
   layer.className = 'sparkle-layer';
   for (let i = 0; i < count; i++) {
     const s = document.createElement('div');
     s.className = 'sparkle-drop';
-    s.innerHTML = SPARKLE(colors[i % colors.length], 3 + (i % 3));
+    s.innerHTML = star(colors[i % colors.length], 10 + ((i * 7) % 14));
     s.style.left = Math.random() * 100 + 'vw';
     s.style.animationDelay = Math.random() * 0.8 + 's';
     s.style.animationDuration = 1.8 + Math.random() * 1.6 + 's';
@@ -82,7 +59,18 @@ export function rainSparkles(count = 28): void {
 
 /** Listen for the Konami code and fire `cb` once it's entered. */
 export function onKonami(cb: () => void): () => void {
-  const seq = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  const seq = [
+    'ArrowUp',
+    'ArrowUp',
+    'ArrowDown',
+    'ArrowDown',
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowLeft',
+    'ArrowRight',
+    'b',
+    'a',
+  ];
   let i = 0;
   const handler = (e: KeyboardEvent) => {
     const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;

@@ -7,6 +7,7 @@ import { defaultsFor } from './types';
 import { createControlPanel, type ControlPanel } from './ui';
 import { exportPng, Recorder, canRecord } from './export';
 import { buildHash, coerceParams, shareUrl } from './url';
+import { PLATES } from './atlas';
 
 export interface EngineController {
   destroy(): void;
@@ -191,22 +192,24 @@ function buildTopbar(def: VizDef) {
   bar.className = 'viz-topbar';
 
   const back = document.createElement('a');
-  back.className = 'viz-back pill';
+  back.className = 'viz-back';
   back.href = '#/';
-  back.innerHTML = '<span>←</span> Gallery';
+  back.innerHTML = '<span aria-hidden="true">←</span> atlas';
 
+  const meta = PLATES[def.id];
   const titleWrap = document.createElement('div');
-  titleWrap.className = 'viz-titlewrap pill';
+  titleWrap.className = 'viz-titlewrap';
+  const eyebrow = document.createElement('p');
+  eyebrow.className = 'viz-eyebrow';
+  eyebrow.textContent = meta ? `plate ${meta.numeral} · ${meta.taxonomy}` : def.id;
   const h = document.createElement('h1');
   h.textContent = def.title;
-  const tag = document.createElement('p');
-  tag.textContent = def.tagline;
-  titleWrap.append(h, tag);
+  titleWrap.append(eyebrow, h);
 
   const aboutBtn = document.createElement('button');
-  aboutBtn.className = 'viz-about-btn pill';
+  aboutBtn.className = 'viz-about-btn';
   aboutBtn.type = 'button';
-  aboutBtn.textContent = 'What is this?';
+  aboutBtn.textContent = 'field notes';
   aboutBtn.dataset.about = 'toggle';
 
   bar.append(back, titleWrap, aboutBtn);
@@ -218,7 +221,8 @@ function buildAbout(def: VizDef) {
   overlay.className = 'about-overlay';
   const card = document.createElement('div');
   card.className = 'about-card';
-  card.innerHTML = `<h2>${escapeHtml(def.title)}</h2>${def.about}<button class="btn about-close" type="button">Close</button>`;
+  const meta = PLATES[def.id];
+  card.innerHTML = `<p class="about-eyebrow">field notes${meta ? ` · ${meta.taxonomy}` : ''}</p><h2>${escapeHtml(def.title)}</h2>${def.about}<button class="btn about-close" type="button">close</button>`;
   overlay.append(card);
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay || (e.target as HTMLElement).classList.contains('about-close')) {

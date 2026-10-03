@@ -33,7 +33,7 @@ export function createControlPanel(
   // --- header / collapse ---
   const header = el('div', 'panel-head');
   const title = el('span', 'panel-title');
-  title.textContent = 'Controls';
+  title.textContent = 'Parameters';
   const collapse = button('panel-collapse', '⟨');
   collapse.title = 'Hide controls (H)';
   header.append(title, collapse);

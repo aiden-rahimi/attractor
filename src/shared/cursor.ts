@@ -11,8 +11,8 @@ interface TrailPoint {
   life: number;
 }
 
-const CLAY: [number, number, number] = [217, 127, 87];
-const BLUE: [number, number, number] = [122, 155, 208];
+const VIOLET: [number, number, number] = [139, 92, 246];
+const VIOLET_DEEP: [number, number, number] = [76, 41, 149];
 
 export function initCursor(): void {
   if (!window.matchMedia('(pointer: fine)').matches) return;
@@ -104,10 +104,10 @@ export function initCursor(): void {
       const p1 = pts[i];
       const a = Math.max(0, p1.life);
       const t = 1 - a;
-      const r = Math.round(CLAY[0] + (BLUE[0] - CLAY[0]) * t);
-      const g = Math.round(CLAY[1] + (BLUE[1] - CLAY[1]) * t);
-      const b = Math.round(CLAY[2] + (BLUE[2] - CLAY[2]) * t);
-      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a * 0.5})`;
+      const r = Math.round(VIOLET[0] + (VIOLET_DEEP[0] - VIOLET[0]) * t);
+      const g = Math.round(VIOLET[1] + (VIOLET_DEEP[1] - VIOLET[1]) * t);
+      const b = Math.round(VIOLET[2] + (VIOLET_DEEP[2] - VIOLET[2]) * t);
+      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a * 0.35})`;
       ctx.lineWidth = 1 + a * 7;
       ctx.beginPath();
       ctx.moveTo(p0.x, p0.y);
