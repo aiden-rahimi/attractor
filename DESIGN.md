@@ -13,13 +13,14 @@ interface is chart furniture: hairline rules, corner ticks, margin notation.
 
 ## Tokens
 
-- `--ground: #14120d` — warm near-black, every surface
-- `--ground-2: #1c1813` — panels, cards
+- `--ground: #08090a` — near-black, every surface
+- `--ground-2: #0e1013` — panels, cards
 - `--ink: #8b5cf6` — the single chart ink (violet). Flat uses only: numerals,
   rules, ticks, active states, slider values, eyebrows. Never glow, never gradient.
 - `--ink-soft: #a78bfa` — hover/readout tint; `--ink-faint` — washes
-- `--paper: #f1ece2` — primary text; `--muted: #a39e93` — secondary; `--faint` — tertiary
-- `--hairline: rgba(241,236,226,.13)` — frames, rules
+- `--paper: #eae5d9` — brightest text; `--text-light: #c4bbaf` — lighter text;
+  `--muted: #a59e8c` — darker text; `--faint: #6e675b` — faintest
+- `--hairline: rgba(196,187,175,.14)` — frames, rules
 - Type: EB Garamond (engraved-chart voice, display + italic) / JetBrains Mono
   (catalog data: numerals, taxonomy, coordinates, formulas, labels)
 

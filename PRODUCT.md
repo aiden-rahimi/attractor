@@ -34,7 +34,9 @@ Static frontend on The Vibe Hosting at https://attractor.thevibehosting.com/math
 ## Brand Commitments
 
 - Name: "attractor". Wordmark is Rüya's topographic-`a` logo (contour-line lowercase a, violet).
-- Accent: violet #8B5CF6 on near-black warm ground #14120d. The old amber/terracotta (#D97F57 family) is retired — it reads as Claude-brand-adjacent.
+- Accent: violet #8B5CF6 on near-black ground #08090A. The old amber/terracotta (#D97F57 family) and the warm dark #14120D are both retired — they read as Claude-brand-adjacent.
+- Text tiers: brightest #EAE5D9, lighter #C4BBAF, darker #A59E8C.
+- "Surprise me" lives centered below the epigraph, above the plates — not in the header. The header carries only the wordmark; "source" lives only in the footer.
 - Small mark: Rüya's "two foci + trail" (two dots in a looping trail; reads as both organic loop and infinity).
 - Logo credit: "logo by rüya" (always Rüya, never Madi/Madison/Madalina on any public surface).
 - Voice: elegant, a little mysterious, minimal. Dry, never corporate. The tagline "made for the love of math." stays.

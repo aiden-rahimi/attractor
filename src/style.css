@@ -12,13 +12,12 @@
   --ink-deep: #6d28d9;
   --ink-dim: rgba(139, 92, 246, 0.38);
   --ink-faint: rgba(139, 92, 246, 0.13);
-  --paper: #eae5d9;
-  --text-light: #c4bbaf;
-  --muted: #a59e8c;
-  --faint: #6e675b;
-  --hairline: rgba(196, 187, 175, 0.14);
-  --hairline-strong: rgba(196, 187, 175, 0.26);
-  --serif: "EB Garamond", "Iowan Old Style", Georgia, serif;
+  --paper: #e6e1ee;
+  --text-light: #bcb6cc;
+  --muted: #948ea0;
+  --faint: #615d70;
+  --hairline: rgba(188, 182, 204, 0.14);
+  --hairline-strong: rgba(188, 182, 204, 0.26);
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
@@ -34,9 +33,9 @@ body {
   padding: 0;
   background: var(--ground);
   color: var(--paper);
-  font-family: var(--serif);
-  font-size: 17px;
-  line-height: 1.55;
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
@@ -79,9 +78,9 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .wordmark img { display: block; }
 
 .wordmark span {
-  font-size: 1.35rem;
-  letter-spacing: 0.28em;
-  text-indent: 0.28em;
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
   font-weight: 500;
 }
 
@@ -120,12 +119,13 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 
 .atlas-intro {
   font-style: italic;
-  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
   color: var(--paper);
-  margin: 0 0 clamp(2rem, 5vw, 3.5rem);
+  margin: 0 auto clamp(2rem, 5vw, 3.5rem);
   padding: 0;
-  max-width: 38rem;
+  max-width: 44rem;
   border: none;
+  text-align: center;
 }
 
 .atlas-intro cite {
@@ -226,17 +226,17 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .plate-cap { margin-top: 0.85rem; }
 
 .plate-cap h2 {
-  font-size: 1.45rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
-  margin: 0 0 0.2rem;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.25rem;
 }
 
 .plate-cap p {
   margin: 0;
   font-style: italic;
   color: var(--muted);
-  font-size: 1.02rem;
+  font-size: 0.88rem;
 }
 
 /* entrance */
@@ -695,7 +695,7 @@ body.in-viz #app {
 }
 
 .about-card h2 {
-  font-size: 1.7rem;
+  font-size: 1.35rem;
   font-weight: 500;
   margin: 0 0 1rem;
   letter-spacing: 0.02em;
