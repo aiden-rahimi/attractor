@@ -34,10 +34,12 @@ export function renderGallery(container: HTMLElement): void {
   const field = document.createElement('main');
   field.className = 'atlas-field';
 
-  const intro = document.createElement('p');
+  const intro = document.createElement('blockquote');
   intro.className = 'atlas-intro';
   intro.innerHTML =
-    'five bodies, charted. <em>each one rewards a wandering hand.</em>';
+    '“Clouds are not spheres, mountains are not cones, coastlines are not circles, ' +
+    'and bark is not smooth, nor does lightning travel in a straight line.”' +
+    '<cite>— Benoît Mandelbrot</cite>';
   field.append(intro);
 
   const spread = document.createElement('div');

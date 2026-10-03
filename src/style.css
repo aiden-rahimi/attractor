@@ -115,12 +115,23 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .atlas-intro {
   font-style: italic;
   font-size: clamp(1.15rem, 2.4vw, 1.5rem);
-  color: var(--muted);
+  color: var(--paper);
   margin: 0 0 clamp(2rem, 5vw, 3.5rem);
-  max-width: 34rem;
+  padding: 0;
+  max-width: 38rem;
+  border: none;
 }
 
-.atlas-intro em { color: var(--paper); }
+.atlas-intro cite {
+  display: block;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.7rem;
+}
 
 .spread {
   display: grid;
@@ -846,9 +857,17 @@ html.custom-cursor .cursor-dot {
 }
 
 @media (max-width: 520px) {
-  .site-nav { gap: 1.1rem; }
+  .site-header { padding: 0.8rem 1rem; }
 
-  .wordmark span { font-size: 1.15rem; }
+  .site-nav { gap: 1rem; }
+
+  .site-nav a { font-size: 0.66rem; white-space: nowrap; }
+
+  .wordmark { gap: 0.5rem; }
+
+  .wordmark img { width: 26px; height: 26px; }
+
+  .wordmark span { font-size: 1.05rem; letter-spacing: 0.16em; text-indent: 0.16em; }
 
   .panel-actions { grid-template-columns: 1fr 1fr; }
 
