@@ -4,19 +4,20 @@
    interface is the atlas's furniture. */
 
 :root {
-  --ground: #14120d;
-  --ground-2: #1c1813;
-  --ground-3: #241f17;
+  --ground: #08090a;
+  --ground-2: #0e1013;
+  --ground-3: #14171c;
   --ink: #8b5cf6;
   --ink-soft: #a78bfa;
   --ink-deep: #6d28d9;
   --ink-dim: rgba(139, 92, 246, 0.38);
   --ink-faint: rgba(139, 92, 246, 0.13);
-  --paper: #f1ece2;
-  --muted: #a39e93;
-  --faint: #6b655c;
-  --hairline: rgba(241, 236, 226, 0.13);
-  --hairline-strong: rgba(241, 236, 226, 0.24);
+  --paper: #eae5d9;
+  --text-light: #c4bbaf;
+  --muted: #a59e8c;
+  --faint: #6e675b;
+  --hairline: rgba(196, 187, 175, 0.14);
+  --hairline-strong: rgba(196, 187, 175, 0.26);
   --serif: "EB Garamond", "Iowan Old Style", Georgia, serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -84,25 +85,30 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   font-weight: 500;
 }
 
-.site-nav {
-  display: flex;
-  gap: 1.6rem;
-  align-items: center;
+/* surprise — centered below the epigraph, above the plates */
+.surprise-row {
+  text-align: center;
+  margin: 0 0 clamp(2.2rem, 5vw, 3.4rem);
 }
 
-.site-nav a {
+.surprise-btn {
   font-family: var(--mono);
   font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  text-decoration: none;
+  text-indent: 0.22em;
   color: var(--muted);
-  padding: 0.3rem 0;
-  border-bottom: 1px solid transparent;
-  transition: color 0.18s ease, border-color 0.18s ease;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.7rem 1.6rem;
+  transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
-.site-nav a:hover { color: var(--ink-soft); border-color: var(--ink-dim); }
+.surprise-btn:hover {
+  color: var(--ink-soft);
+  border-color: var(--ink-dim);
+  background: var(--ink-faint);
+}
 
 /* ============================ ATLAS FIELD ============================ */
 
@@ -174,7 +180,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .plate-frame {
   position: relative;
   border: 1px solid var(--hairline);
-  background: #0e0c09;
+  background: #060708;
   transition: border-color 0.25s ease;
 }
 
@@ -313,7 +319,7 @@ body.in-viz #app {
 .viz-stage {
   position: absolute;
   inset: 0;
-  background: #0b0a08;
+  background: #050607;
 }
 
 .viz-stage canvas {
@@ -653,7 +659,7 @@ body.in-viz #app {
   display: grid;
   place-items: center;
   padding: 1.2rem;
-  background: rgba(11, 10, 8, 0.72);
+  background: rgba(5, 6, 7, 0.74);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   opacity: 0;
@@ -858,10 +864,6 @@ html.custom-cursor .cursor-dot {
 
 @media (max-width: 520px) {
   .site-header { padding: 0.8rem 1rem; }
-
-  .site-nav { gap: 1rem; }
-
-  .site-nav a { font-size: 0.66rem; white-space: nowrap; }
 
   .wordmark { gap: 0.5rem; }
 

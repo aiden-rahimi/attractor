@@ -19,16 +19,7 @@ export function renderGallery(container: HTMLElement): void {
     <a class="wordmark" href="#/" aria-label="attractor — home">
       <img src="./logo-hero.svg" alt="" width="30" height="30" />
       <span>attractor</span>
-    </a>
-    <nav class="site-nav">
-      <a href="#" data-surprise>surprise me</a>
-      <a href="${REPO}" target="_blank" rel="noopener">source</a>
-    </nav>`;
-  header.querySelector('[data-surprise]')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    const viz = VISUALIZATIONS[Math.floor(Math.random() * VISUALIZATIONS.length)];
-    location.hash = `#/v/${viz.id}?rand=1`;
-  });
+    </a>`;
   container.append(header);
 
   const field = document.createElement('main');
@@ -41,6 +32,19 @@ export function renderGallery(container: HTMLElement): void {
     'and bark is not smooth, nor does lightning travel in a straight line.”' +
     '<cite>— Benoît Mandelbrot</cite>';
   field.append(intro);
+
+  const surpriseRow = document.createElement('div');
+  surpriseRow.className = 'surprise-row';
+  const surpriseBtn = document.createElement('button');
+  surpriseBtn.type = 'button';
+  surpriseBtn.className = 'surprise-btn';
+  surpriseBtn.textContent = 'surprise me';
+  surpriseBtn.addEventListener('click', () => {
+    const viz = VISUALIZATIONS[Math.floor(Math.random() * VISUALIZATIONS.length)];
+    location.hash = `#/v/${viz.id}?rand=1`;
+  });
+  surpriseRow.append(surpriseBtn);
+  field.append(surpriseRow);
 
   const spread = document.createElement('div');
   spread.className = 'spread';
