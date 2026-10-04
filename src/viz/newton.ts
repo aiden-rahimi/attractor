@@ -181,13 +181,13 @@ function makeInstance(host: VizHost): VizInstance {
   const gl = getGL(canvas);
   const prog = program(gl, VERT_FULLSCREEN, FRAG);
   const vao = fullscreenTriangle(gl);
-  let palTex = paletteTexture(gl, 'turbo');
+  let palTex = paletteTexture(gl, 'violet');
 
   const HARD_MAX_ITER = 256;
   const INITIAL_SCALE = 1.6;
   const st = {
     poly: 'z^3 - 1',
-    palette: 'turbo',
+    palette: 'violet',
     maxIter: 90,
   };
   let coeffs = parsePoly(st.poly)!;
@@ -370,7 +370,7 @@ export const newtonDef: VizDef = {
     and drag to pan into the filigree along the borders.</p>`,
   params: [
     { type: 'text', key: 'poly', label: 'Polynomial p(z)', default: 'z^3 - 1', placeholder: 'z^3 - 1' },
-    { type: 'palette', key: 'palette', label: 'Palette', default: 'turbo' },
+    { type: 'palette', key: 'palette', label: 'Palette', default: 'violet' },
     { type: 'range', key: 'maxIter', label: 'Detail (iterations)', min: 20, max: 200, step: 1, default: 90 },
   ],
   create: makeInstance,
@@ -422,7 +422,7 @@ export const newtonDef: VizDef = {
           }
         }
         const shade = Math.pow(1 - used / maxIter, 0.6);
-        const [cr, cg, cb] = sample('turbo', (best + 0.5) / 3);
+        const [cr, cg, cb] = sample('violet', (best + 0.5) / 3);
         const idx = (py * w + px) * 4;
         img.data[idx] = cr * (0.18 + 0.82 * shade);
         img.data[idx + 1] = cg * (0.18 + 0.82 * shade);

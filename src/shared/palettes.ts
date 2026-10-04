@@ -22,6 +22,14 @@ function hexStops(hexes: string[]): RGB[] {
 
 // Matplotlib perceptual colormaps, sampled at 10 stops (close enough visually).
 const PALETTES: Record<string, Palette> = {
+  violet: {
+    name: 'violet',
+    label: 'Violet',
+    stops: hexStops([
+      '#060409', '#190e35', '#2e1660', '#4c2396',
+      '#6d2fc4', '#8b5cf6', '#a87fff', '#c9a8ff',
+    ]),
+  },
   viridis: {
     name: 'viridis',
     label: 'Viridis',
