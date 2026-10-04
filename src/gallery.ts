@@ -7,7 +7,7 @@ import { PLATES } from './shared/atlas';
 import { makeGradientCss } from './shared/palettes';
 import { colophonSvg, rainSparkles } from './shared/pixel';
 
-const REPO = 'https://github.com/aiden-rahimi/MathVisualize';
+const REPO = 'https://github.com/aiden-rahimi/attractor';
 const FALLBACK_PALETTES = ['inferno', 'aurora', 'turbo', 'sunset', 'ice'];
 
 export function renderGallery(container: HTMLElement): void {
