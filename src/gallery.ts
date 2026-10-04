@@ -33,19 +33,6 @@ export function renderGallery(container: HTMLElement): void {
     '<cite>— Benoît Mandelbrot</cite>';
   field.append(intro);
 
-  const surpriseRow = document.createElement('div');
-  surpriseRow.className = 'surprise-row';
-  const surpriseBtn = document.createElement('button');
-  surpriseBtn.type = 'button';
-  surpriseBtn.className = 'surprise-btn';
-  surpriseBtn.textContent = 'surprise me';
-  surpriseBtn.addEventListener('click', () => {
-    const viz = VISUALIZATIONS[Math.floor(Math.random() * VISUALIZATIONS.length)];
-    location.hash = `#/v/${viz.id}?rand=1`;
-  });
-  surpriseRow.append(surpriseBtn);
-  field.append(surpriseRow);
-
   const spread = document.createElement('div');
   spread.className = 'spread';
   field.append(spread);

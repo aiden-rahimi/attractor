@@ -18,11 +18,13 @@ interface is chart furniture: hairline rules, corner ticks, margin notation.
 - `--ink: #8b5cf6` — the single chart ink (violet). Flat uses only: numerals,
   rules, ticks, active states, slider values, eyebrows. Never glow, never gradient.
 - `--ink-soft: #a78bfa` — hover/readout tint; `--ink-faint` — washes
-- `--paper: #eae5d9` — brightest text; `--text-light: #c4bbaf` — lighter text;
-  `--muted: #a59e8c` — darker text; `--faint: #6e675b` — faintest
-- `--hairline: rgba(196,187,175,.14)` — frames, rules
-- Type: EB Garamond (engraved-chart voice, display + italic) / JetBrains Mono
-  (catalog data: numerals, taxonomy, coordinates, formulas, labels)
+- `--paper: #e6e1ee` — brightest text; `--text-light: #bcb6cc` — lighter text;
+  `--muted: #948ea0` — darker text; `--faint: #615d70` — faintest.
+  All text tiers are violet-tinted so the type reads as one system with the ink.
+- `--hairline: rgba(188,182,204,.14)` — frames, rules
+- Type: **JetBrains Mono everywhere** — the observatory-terminal voice. No serif:
+  the engraved-chart serif read as AI-generated, so the serif was cut entirely
+  and hierarchy moved to size/weight/color within the mono.
 
 ## Components
 
