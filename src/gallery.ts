@@ -85,7 +85,9 @@ export function renderGallery(container: HTMLElement): void {
 
     const cap = document.createElement('div');
     cap.className = 'plate-cap';
-    cap.innerHTML = `<h2>${viz.title}</h2><p>${meta.note}</p>`;
+    cap.innerHTML = `<h2>${viz.title}</h2><p>${meta.note}</p>${
+      meta.quoteBy ? `<span class="plate-quote-by">— ${meta.quoteBy}</span>` : ''
+    }`;
 
     plate.append(head, frame, cap);
     spread.append(plate);

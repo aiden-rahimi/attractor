@@ -22,9 +22,11 @@ interface is chart furniture: hairline rules, corner ticks, margin notation.
   `--muted: #948ea0` — darker text; `--faint: #615d70` — faintest.
   All text tiers are violet-tinted so the type reads as one system with the ink.
 - `--hairline: rgba(188,182,204,.14)` — frames, rules
-- Type: **JetBrains Mono everywhere** — the observatory-terminal voice. No serif:
-  the engraved-chart serif read as AI-generated, so the serif was cut entirely
-  and hierarchy moved to size/weight/color within the mono.
+- Type: three voices, each with one job —
+  **Bricolage Grotesque** (display: wordmark, epigraph, plate/viz titles),
+  **Lato** (body: notes, paragraphs — chosen for readability),
+  **JetBrains Mono** (data: taxonomy, numerals, labels, buttons, formulas).
+  No serif anywhere; the serif read as AI-generated and was cut.
 
 ## Components
 
